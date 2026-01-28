@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 const EditBlog = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -25,7 +27,7 @@ const EditBlog = () => {
 
   const fetchBlog = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/blogs/${id}`);
+      const response = await fetch(`${API_URL}/blogs/${id}`);
       const blog = await response.json();
 
       if (parseInt(blog.authorId) !== parseInt(user.id)) {
@@ -84,7 +86,7 @@ const EditBlog = () => {
         updatedAt: new Date().toISOString()
       };
 
-      const response = await fetch(`http://localhost:3000/blogs/${id}`, {
+      const response = await fetch(`${API_URL}/blogs/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedBlog)

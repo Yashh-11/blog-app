@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import BlogCard from '../components/BlogCard';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 const Home = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,7 +18,7 @@ const Home = () => {
   const fetchBlogs = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:3000/blogs');
+      const response = await fetch(`${API_URL}/blogs`);
       const data = await response.json();
       setBlogs(data);
       setError('');
@@ -43,7 +45,7 @@ const Home = () => {
         ? blog.likedBy.filter(id => id !== parseInt(user.id))
         : [...(blog.likedBy || []), parseInt(user.id)];
 
-      const response = await fetch(`http://localhost:3000/blogs/${blogId}`, {
+      const response = await fetch(`${API_URL}/blogs/${blogId}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -70,7 +72,7 @@ const Home = () => {
 
     if (window.confirm('Are you sure you want to delete this blog?')) {
       try {
-        const response = await fetch(`http://localhost:3000/blogs/${blogId}`, {
+        const response = await fetch(`${API_URL}/blogs/${blogId}`, {
           method: 'DELETE'
         });
         

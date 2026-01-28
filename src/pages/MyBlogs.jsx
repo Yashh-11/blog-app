@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import BlogCard from '../components/BlogCard';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 const MyBlogs = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -21,7 +23,7 @@ const MyBlogs = () => {
   const fetchMyBlogs = async () => {
     try {
       setLoading(true);
-      const response = await fetch('http://localhost:3000/blogs');
+      const response = await fetch(`${API_URL}/blogs`);
       const allBlogs = await response.json();
       
       const userId = parseInt(user.id);
@@ -40,7 +42,7 @@ const MyBlogs = () => {
   const handleDelete = async (blogId) => {
     if (window.confirm('Are you sure you want to delete this blog?')) {
       try {
-        const response = await fetch(`http://localhost:3000/blogs/${blogId}`, {
+        const response = await fetch(`${API_URL}/blogs/${blogId}`, {
           method: 'DELETE'
         });
         

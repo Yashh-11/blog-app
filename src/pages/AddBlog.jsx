@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+
 const AddBlog = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -49,7 +51,7 @@ const AddBlog = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:3000/blogs');
+      const response = await fetch(`${API_URL}/blogs`);
       const blogs = await response.json();
       
       const newId = blogs.length ? Math.max(...blogs.map(b => parseInt(b.id))) + 1 : 1;
@@ -67,7 +69,7 @@ const AddBlog = () => {
         updatedAt: new Date().toISOString()
       };
 
-      const createResponse = await fetch('http://localhost:3000/blogs', {
+      const createResponse = await fetch(`${API_URL}/blogs`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newBlog)

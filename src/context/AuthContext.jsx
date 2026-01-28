@@ -1,6 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 
 const AuthContext = createContext();
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -16,7 +17,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await fetch('http://localhost:3000/users');
+      const response = await fetch(`${API_URL}/users`);
       const users = await response.json();
       
       const foundUser = users.find(u => u.email === email && u.password === password);
@@ -36,7 +37,7 @@ export const AuthProvider = ({ children }) => {
 
   const signup = async (username, email, password) => {
     try {
-      const response = await fetch('http://localhost:3000/users');
+      const response = await fetch(`${API_URL}/users`);
       const users = await response.json();
       
       if (users.some(u => u.email === email)) {
@@ -50,7 +51,7 @@ export const AuthProvider = ({ children }) => {
         password
       };
 
-      const response2 = await fetch('http://localhost:3000/users', {
+      const response2 = await fetch(`${API_URL}/users`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newUser)
