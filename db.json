@@ -45,10 +45,9 @@
       "image": "https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=300&fit=crop",
       "author": "john_doe",
       "authorId": 1,
-      "likes": 7,
+      "likes": 6,
       "likedBy": [
-        4,
-        3
+        4
       ],
       "createdAt": "2026-01-15T10:30:00Z",
       "updatedAt": "2026-01-15T10:30:00Z"
@@ -96,18 +95,6 @@
       ],
       "createdAt": "2026-01-23T22:27:55.952Z",
       "updatedAt": "2026-01-23T22:27:55.952Z"
-    },
-    {
-      "id": 6,
-      "title": "Provident accusamus",
-      "description": "Corrupti dolore qui",
-      "image": "https://www.boqyt.us",
-      "author": "Yash",
-      "authorId": 3,
-      "likes": 0,
-      "likedBy": [],
-      "createdAt": "2026-01-27T23:49:39.910Z",
-      "updatedAt": "2026-01-27T23:49:39.910Z"
     }
   ]
 }
